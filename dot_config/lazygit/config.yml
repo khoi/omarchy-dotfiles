@@ -1,0 +1,6 @@
+customCommands:
+  - key: '<c-s>'
+    context: 'global'
+    command: 'echo hello'
+    description: 'Echo hello'
+    output: 'popup'
