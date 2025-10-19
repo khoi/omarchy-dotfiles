@@ -7,9 +7,10 @@
   "modules-left": ["custom/omarchy", "hyprland/workspaces"],
   "modules-center": ["clock", "custom/update", "custom/screenrecording-indicator"],
   "modules-right": [
-    "group/tray-expander",
+    "tray",
     "cpu",
     "custom/gpu",
+    "memory",
     "bluetooth",
     "network",
     "pulseaudio",
@@ -63,6 +64,12 @@
     "format": "󰢮 {}%",
     "return-type": "",
     "interval": 5,
+    "on-click": "$TERMINAL -e btop"
+  },
+  "memory": {
+    "interval": 5,
+    "format": "󰍛 {percentage}%",
+    "tooltip-format": "{used:0.1f}G / {total:0.1f}G used",
     "on-click": "$TERMINAL -e btop"
   },
   "clock": {
@@ -120,18 +127,6 @@
     "format-icons": {
       "default": ["", "", ""]
     }
-  },
-  "group/tray-expander": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 600,
-      "children-class": "tray-group-item"
-    },
-    "modules": ["custom/expand-icon", "tray"]
-  },
-  "custom/expand-icon": {
-    "format": " ",
-    "tooltip": false
   },
   "custom/screenrecording-indicator": {
     "on-click": "omarchy-cmd-screenrecord",

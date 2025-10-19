@@ -32,6 +32,7 @@
 
 #cpu,
 #custom-gpu,
+#memory,
 #battery,
 #pulseaudio,
 #custom-omarchy,
@@ -42,19 +43,20 @@
 }
 
 #tray {
-  margin-right: 16px;
+  margin: 0 7.5px;
 }
 
-#bluetooth {
-  margin-right: 17px;
+#tray > .passive {
+  -gtk-icon-effect: dim;
 }
 
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+#bluetooth,
 #network {
-  margin-right: 13px;
-}
-
-#custom-expand-icon {
-  margin-right: 20px;
+  margin: 0 7.5px;
 }
 
 tooltip {
