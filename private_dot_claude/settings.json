@@ -6,5 +6,9 @@
     "DISABLE_ERROR_REPORTING": "1"
   },
   "includeCoAuthoredBy": false,
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/cc-statusline-rs"
+  }
 }
