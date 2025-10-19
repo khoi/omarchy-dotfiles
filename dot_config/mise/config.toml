@@ -1,0 +1,3 @@
+[tools]
+ghq = "latest"
+node = "latest"
