@@ -1,7 +1,6 @@
 #!/bin/bash
 # run_onchange_install-packages.sh.tmpl
-# Install extra packages when this script changes
-# Add or remove packages from the list below as needed
+# IMPORTANT: this script needs to be idempotent
 
 set -e
 
@@ -23,6 +22,8 @@ PACKAGES=(
 # ==============================================================================
 
 install_packages() {
+    echo "📦 Installing packages..."
+
     local packages_to_install=()
 
     # Check which packages are not installed
@@ -34,11 +35,78 @@ install_packages() {
 
     # Install missing packages
     if [ ${#packages_to_install[@]} -gt 0 ]; then
-        echo "Installing packages: ${packages_to_install[*]}"
+        echo "	Installing packages: ${packages_to_install[*]}"
         sudo pacman -S --noconfirm --needed "${packages_to_install[@]}"
-        echo "✓ Packages installed successfully"
+        echo "	✓ Packages installed successfully"
     else
-        echo "✓ All packages are already installed"
+        echo "	✓ All packages are already installed"
+    fi
+}
+
+install_tx02_font() {
+    echo "🔤 Installing TX-02 font..."
+
+    # Check if TX-02 font is already installed
+    if [[ -f ~/.local/share/fonts/TX-02-Variable.ttf ]]; then
+        echo "	✓ TX-02 font already installed"
+
+        # Set TX-02 as the system font using omarchy if not already set
+        if command -v omarchy-font-set &> /dev/null && command -v omarchy-font-current &> /dev/null; then
+            current_font=$(omarchy-font-current)
+            if [[ "$current_font" != "TX-02-Variable" ]]; then
+                echo "	🎨 Setting TX-02 as system font..."
+                if omarchy-font-set "TX-02-Variable" &> /dev/null; then
+                    echo "	✓ TX-02 set as system font"
+                else
+                    echo "	⚠️  Warning: Failed to set TX-02 as system font"
+                fi
+            fi
+        fi
+
+        return 0
+    fi
+
+    # Check if 1Password CLI is installed
+    if ! command -v op &> /dev/null; then
+        echo "	⚠️  1Password CLI not installed"
+        echo "	   Install with: pacman -S 1password-cli"
+        echo "	   Skipping font installation"
+        return 0
+    fi
+
+    # Check if logged in to 1Password
+    if ! op account list &> /dev/null; then
+        echo "	⚠️  Not logged in to 1Password"
+        echo "	   Login with: eval \$(op signin)"
+        echo "	   Skipping font installation"
+        return 0
+    fi
+
+    # Ensure fonts directory exists
+    mkdir -p ~/.local/share/fonts
+
+    # Download TX-02 font from 1Password
+    echo "	⬇️  Downloading TX-02-Variable from 1Password..."
+    if op document get "TX-02-Variable" --force -o ~/.local/share/fonts/TX-02-Variable.ttf &> /dev/null; then
+        echo "	✓ Font downloaded successfully"
+
+        # Rebuild font cache (suppress all output)
+        fc-cache -f &> /dev/null
+        echo "	✓ Font cache updated"
+
+        # Set TX-02 as the system font using omarchy
+        if command -v omarchy-font-set &> /dev/null; then
+            echo "	🎨 Setting TX-02 as system font..."
+            if omarchy-font-set "TX-02-Variable" &> /dev/null; then
+                echo "	✓ TX-02 set as system font"
+            else
+                echo "	⚠️  Warning: Failed to set TX-02 as system font"
+            fi
+        fi
+    else
+        echo "	✗ Failed to download TX-02 font"
+        echo "	   Check that 'TX-02-Variable' document exists in your 1Password vault"
+        return 1
     fi
 }
 
@@ -47,6 +115,8 @@ install_packages() {
 # ==============================================================================
 
 install_packages
+echo
+install_tx02_font
 
 echo
-echo "Package installation complete!"
+echo "✅ Package installation complete!"

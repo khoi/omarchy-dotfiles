@@ -2,7 +2,7 @@
 config-file = ?"~/.config/omarchy/current/theme/ghostty.conf"
 
 # Font
-font-family = "JetBrainsMono Nerd Font Mono"
+font-family = "TX-02-Variable"
 font-style = Regular
 font-size = 14
 
