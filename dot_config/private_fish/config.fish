@@ -40,15 +40,3 @@ fish_add_path ~/.bin
 fish_add_path ~/.local/bin
 
 zoxide init fish | source
-
-if status is-interactive
-    export ZELLIJ_CONFIG_DIR=$HOME/.config/zellij
-    if [ "$TERM" = xterm-ghostty ]
-        if not set -q ZELLIJ
-            zellij attach -c "$USER"
-            if test "$ZELLIJ_AUTO_EXIT" = true
-                kill $fish_pid
-            end
-        end
-    end
-end
