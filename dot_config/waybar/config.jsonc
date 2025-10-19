@@ -9,7 +9,9 @@
   "modules-right": [
     "tray",
     "cpu",
+    "temperature",
     "custom/gpu",
+    "custom/gpu-temp",
     "memory",
     "bluetooth",
     "network",
@@ -59,10 +61,24 @@
     "format": "󰍛 {usage}%",
     "on-click": "$TERMINAL -e btop"
   },
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+    "interval": 5,
+    "format": "{temperatureC}°C",
+    "critical-threshold": 85,
+    "on-click": "$TERMINAL -e btop"
+  },
   "custom/gpu": {
     "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
     "format": "󰢮 {}%",
     "return-type": "",
+    "interval": 5,
+    "on-click": "$TERMINAL -e btop"
+  },
+  "custom/gpu-temp": {
+    "exec": "~/.config/waybar/scripts/gpu-temp.sh",
+    "format": "{}",
+    "return-type": "json",
     "interval": 5,
     "on-click": "$TERMINAL -e btop"
   },

@@ -31,7 +31,9 @@
 }
 
 #cpu,
+#temperature,
 #custom-gpu,
+#custom-gpu-temp,
 #memory,
 #battery,
 #pulseaudio,
@@ -83,4 +85,14 @@ tooltip {
 
 #custom-screenrecording-indicator.active {
   color: #a55555;
+}
+
+/* Temperature color states */
+#temperature.critical,
+#custom-gpu-temp.critical {
+  color: #ff6b6b;
+}
+
+#custom-gpu-temp.warning {
+  color: #f9e2af;
 }
