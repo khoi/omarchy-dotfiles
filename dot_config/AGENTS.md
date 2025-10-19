@@ -198,9 +198,8 @@ After making changes:
 
 ## References
 
-My macOS dotfiles can be found at git@github.com:khoi/dotfiles.git, feel free to clone it to /tmp to inspect when the users mention it.
-
-omarchy source code can also be cloned to /tmp/omarchy from https://github.com/basecamp/omarchy
+- macOS dotfiles can be found at `ghq clone git@github.com:khoi/dotfiles.git` 
+- omarchy source code can be found at `ghq clone git@github.com:basecamp/omarchy.git`
 
 
 Please help me with my Linux system configuration and administration tasks following these guidelines.
