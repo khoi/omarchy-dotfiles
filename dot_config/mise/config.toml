@@ -2,3 +2,7 @@
 chezmoi = "latest"
 ghq = "latest"
 node = "latest"
+yarn = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = []

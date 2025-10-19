@@ -42,4 +42,12 @@ end
 fish_add_path ~/.bin
 fish_add_path ~/.local/bin
 
-zoxide init fish | source
+# zoxide
+if command -v zoxide &>/dev/null
+    zoxide init fish | source
+end
+
+# mise
+if command -v mise &>/dev/null
+    mise activate fish | source
+end
