@@ -13,6 +13,9 @@ set -gx XDG_CONFIG_HOME ~/.config
 # FZF
 set -Ux FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix'
 set -Ux FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+if command -v fzf &>/dev/null
+    fzf --fish | source
+end
 
 # Aliases
 alias o xdg-open
