@@ -3,6 +3,9 @@
 source ~/.local/share/omarchy/default/bash/rc
 
 # Add your own exports, aliases, and functions here.
+
+# Add ~/bin to PATH
+export PATH="$HOME/bin:$PATH"
 #
 # Make an alias for invoking commands you use constantly
 # alias p='python'
