@@ -15,4 +15,4 @@ alias v='nvim'
 alias lg='lazygit'
 
 # Claude aliases
-alias ac='claude --dangerously-skip-prompts'
+alias ac='claude --dangerously-skip-permissions'
