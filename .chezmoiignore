@@ -1,0 +1,55 @@
+# Application Caches and Data (large, ephemeral)
+.config/chromium/
+.config/BraveSoftware/
+.config/google-chrome/
+.config/google-chrome-beta/
+.config/google-chrome-unstable/
+.config/vivaldi/
+.config/vivaldi-snapshot/
+.config/microsoft-edge-dev/
+.config/Cursor/
+.config/Signal/
+.config/1Password/
+
+# Runtime and generated data
+.config/fcitx/
+.config/ibus/
+.config/dconf/
+.config/pulse/
+.config/nautilus/
+.config/qalculate/
+.config/yay/
+
+# Chezmoi itself (managed from source directory)
+.config/chezmoi/
+
+# Backup files
+.config/nvim.backup.*
+.config/**/*.bak
+.config/**/*.bak.*
+
+# Omarchy theme symlinks (point to system locations)
+.config/omarchy/current/
+.config/omarchy/themes/*/
+
+# Cache directories
+.cache/
+.mozilla/
+.pki/
+.nv/
+.npm/
+.gnupg/
+
+# SSH private keys (we only track config)
+.ssh/id_*
+.ssh/*.pem
+.ssh/*.key
+.ssh/known_hosts
+.ssh/known_hosts.old
+
+# Claude runtime data
+.claude.json
+.claude.json.backup
+
+# Shell history
+.bash_history
