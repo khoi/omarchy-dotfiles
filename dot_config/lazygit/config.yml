@@ -1,6 +1,6 @@
 customCommands:
   - key: '<c-s>'
     context: 'global'
-    command: 'echo hello'
-    description: 'Echo hello'
-    output: 'popup'
+    command: 'claude -p "/commit"'
+    description: 'Claude commit'
+    output: 'log'
