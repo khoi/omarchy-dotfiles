@@ -1,10 +1,11 @@
 #!/bin/bash
-# run_onchange_install-packages.sh.tmpl
+# run_onchange_system-setup.sh.tmpl
+# System setup including packages, shell configuration, and fonts
 # IMPORTANT: this script needs to be idempotent
 
 set -e
 
-echo "Checking and installing extra packages..."
+echo "Running system setup..."
 echo
 
 # ==============================================================================
@@ -142,6 +143,37 @@ install_tx02_font() {
     fi
 }
 
+change_shell_to_fish() {
+    echo "🐠 Configuring fish as default shell..."
+
+    # Check if fish is installed
+    if ! command -v fish &> /dev/null; then
+        echo "	⚠️  Fish shell is not installed. Skipping shell change."
+        return 0
+    fi
+
+    FISH_PATH=$(which fish)
+    CURRENT_SHELL=$(getent passwd "$USER" | cut -d: -f7)
+
+    # Check if shell is already fish
+    if [ "$CURRENT_SHELL" = "$FISH_PATH" ]; then
+        echo "	✓ Default shell is already set to fish"
+        return 0
+    fi
+
+    # Check if fish is in /etc/shells
+    if ! grep -q "^$FISH_PATH$" /etc/shells; then
+        echo "	📝 Adding $FISH_PATH to /etc/shells..."
+        echo "$FISH_PATH" | sudo tee -a /etc/shells > /dev/null
+    fi
+
+    # Change the shell
+    echo "	🔄 Changing shell from $CURRENT_SHELL to $FISH_PATH..."
+    chsh -s "$FISH_PATH"
+    echo "	✓ Default shell changed to fish"
+    echo "	   Please log out and log back in for the change to take effect"
+}
+
 # ==============================================================================
 # Main execution
 # ==============================================================================
@@ -151,6 +183,8 @@ echo
 install_fisher
 echo
 install_tx02_font
+echo
+change_shell_to_fish
 
 echo
-echo "✅ Package installation complete!"
+echo "✅ System setup complete!"
