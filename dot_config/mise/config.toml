@@ -1,3 +1,4 @@
 [tools]
+chezmoi = "latest"
 ghq = "latest"
 node = "latest"
