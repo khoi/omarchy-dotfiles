@@ -16,6 +16,9 @@ PACKAGES=(
     # Terminal emulator
     ghostty
 
+    # Shell
+    fish
+
     # Git extensions
     git-lfs
 )
@@ -43,6 +46,32 @@ install_packages() {
         echo "	✓ Packages installed successfully"
     else
         echo "	✓ All packages are already installed"
+    fi
+}
+
+install_fisher() {
+    echo "🐡 Setting up Fisher and fish plugins..."
+
+    # Check if fish is installed
+    if ! command -v fish &> /dev/null; then
+        echo "	⚠️  Fish shell is not installed. Skipping Fisher setup."
+        return 0
+    fi
+
+    # Check if Fisher is already installed
+    if fish -c "type -q fisher" &> /dev/null; then
+        echo "	✓ Fisher already installed"
+    else
+        echo "	⬇️  Installing Fisher..."
+        fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher" &> /dev/null
+        echo "	✓ Fisher installed successfully"
+    fi
+
+    # Install/update plugins from fish_plugins file
+    if [ -f ~/.config/fish/fish_plugins ]; then
+        echo "	📦 Syncing fish plugins..."
+        fish -c "fisher update" &> /dev/null
+        echo "	✓ Fish plugins synced successfully"
     fi
 }
 
@@ -118,6 +147,8 @@ install_tx02_font() {
 # ==============================================================================
 
 install_packages
+echo
+install_fisher
 echo
 install_tx02_font
 

@@ -6,6 +6,9 @@ font-family = "TX-02-Variable"
 font-style = Regular
 font-size = 14
 
+# Shell
+command = fish
+
 # Window
 window-padding-x = 14
 window-padding-y = 14
