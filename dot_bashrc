@@ -10,3 +10,6 @@ source ~/.local/share/omarchy/default/bash/rc
 # Neovim aliases
 alias vim='nvim'
 alias v='nvim'
+
+# Git aliases
+alias lg='lazygit'
