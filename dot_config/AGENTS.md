@@ -200,5 +200,7 @@ After making changes:
 
 My macOS dotfiles can be found at git@github.com:khoi/dotfiles.git, feel free to clone it to /tmp to inspect when the users mention it.
 
+omarchy source code can also be cloned to /tmp/omarchy from https://github.com/basecamp/omarchy
+
 
 Please help me with my Linux system configuration and administration tasks following these guidelines.
