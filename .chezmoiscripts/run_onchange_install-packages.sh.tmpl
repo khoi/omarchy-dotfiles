@@ -1,0 +1,52 @@
+#!/bin/bash
+# run_onchange_install-packages.sh.tmpl
+# Install extra packages when this script changes
+# Add or remove packages from the list below as needed
+
+set -e
+
+echo "Checking and installing extra packages..."
+echo
+
+# ==============================================================================
+# Package Lists
+# ==============================================================================
+
+# Core utilities and tools
+PACKAGES=(
+    # Terminal emulator
+    ghostty
+)
+
+# ==============================================================================
+# Installation
+# ==============================================================================
+
+install_packages() {
+    local packages_to_install=()
+
+    # Check which packages are not installed
+    for package in "${PACKAGES[@]}"; do
+        if ! pacman -Q "$package" &> /dev/null; then
+            packages_to_install+=("$package")
+        fi
+    done
+
+    # Install missing packages
+    if [ ${#packages_to_install[@]} -gt 0 ]; then
+        echo "Installing packages: ${packages_to_install[*]}"
+        sudo pacman -S --noconfirm --needed "${packages_to_install[@]}"
+        echo "✓ Packages installed successfully"
+    else
+        echo "✓ All packages are already installed"
+    fi
+}
+
+# ==============================================================================
+# Main execution
+# ==============================================================================
+
+install_packages
+
+echo
+echo "Package installation complete!"
