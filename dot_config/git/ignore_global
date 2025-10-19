@@ -1,0 +1,20 @@
+# IDEs
+.idea
+.vscode/
+
+# Bundler
+vendor/
+.bundle/
+
+# tmp
+tmp/
+
+# aider
+.aider*
+
+# Local markdown files
+*.local.md
+
+# direnv
+.envrc
+.direnv/

@@ -1,0 +1,49 @@
+[push]
+	default = current
+[color]
+	ui = true
+[core]
+	excludesfile = ~/.config/git/ignore_global
+	autocrlf = input
+	commentChar = %
+[merge]
+	ff = only
+[pull]
+	ff = only
+	default = current
+[rerere]
+	enabled = true
+	autoUpdate = true
+[fetch]
+	prune = true
+[rebase]
+	autosquash = true
+	autostash = true
+[user]
+	name = khoi
+	email = git@khoi.io
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIR0MxbYdOCgxOp1D27lGSjolzabibv88N2wplMbcbE
+[commit]
+	gpgsign = true
+	status = false
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /opt/1Password/op-ssh-sign
+	allowedSignersFile = /home/khoi/.config/git/allowed_signers
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	find = "!git log --color -S "
+	nuke = "!git reset --hard && git clean -fd"
+[submodule]
+	recurse = false
