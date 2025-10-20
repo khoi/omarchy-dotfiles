@@ -2,6 +2,7 @@
 chezmoi = "latest"
 ghq = "latest"
 node = "latest"
+uv = "latest"
 yarn = "latest"
 
 [settings]
