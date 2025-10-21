@@ -63,7 +63,7 @@
   },
   "temperature": {
     "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
-    "interval": 5,
+    "interval": 1,
     "format": "{temperatureC}°C",
     "critical-threshold": 85,
     "on-click": "$TERMINAL -e btop"
@@ -79,7 +79,7 @@
     "exec": "~/.config/waybar/scripts/gpu-temp.sh",
     "format": "{}",
     "return-type": "json",
-    "interval": 5,
+    "interval": 1,
     "on-click": "$TERMINAL -e btop"
   },
   "memory": {
