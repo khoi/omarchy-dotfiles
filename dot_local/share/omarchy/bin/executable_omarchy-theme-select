@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Get current theme
+current_theme=$(omarchy-theme-current)
+
+# Get all themes and reorder so current theme is first
+# This prevents changing the theme when the script starts
+all_themes=$(omarchy-theme-list)
+other_themes=$(echo "$all_themes" | grep -v "^${current_theme}$")
+themes_ordered="${current_theme}"$'\n'"${other_themes}"
+
+echo "$themes_ordered" | fzf --cycle --bind 'focus:execute-silent(omarchy-theme-set {})'
