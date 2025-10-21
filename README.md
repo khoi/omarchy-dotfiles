@@ -13,7 +13,7 @@
 
 # Omarchy Dotfiles
 
-> My personal dotfiles for [Omarchy](https://omarchy.org) - An opinionated, beautiful Arch Linux setup based on Hyprland.
+> My personal dotfiles for [Omarchy](https://omarchy.org) - An opinionated, beautiful Arch Linux setup based on Hyprland. Looking for [macOS](https://github.com/khoi/dotfiles)?
 
 Managed with [chezmoi](https://chezmoi.io) for easy deployment across machines.
 
