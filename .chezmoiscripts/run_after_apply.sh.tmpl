@@ -1,0 +1,64 @@
+#!/bin/bash
+# run_after_apply.sh.tmpl
+# Automatically reload services and configs after chezmoi apply
+
+set -e
+
+echo "🔄 Reloading configurations..."
+
+# ==============================================================================
+# Helper Functions
+# ==============================================================================
+
+reload_if_running() {
+    local service=$1
+    local reload_cmd=$2
+
+    if pgrep -x "$service" > /dev/null; then
+        echo "  ↻ Reloading $service..."
+        eval "$reload_cmd" &> /dev/null && echo "    ✓ $service reloaded" || echo "    ⚠️  Failed to reload $service"
+    fi
+}
+
+restart_if_running() {
+    local service=$1
+    local restart_cmd=$2
+
+    if pgrep -x "$service" > /dev/null; then
+        echo "  ↻ Restarting $service..."
+        eval "$restart_cmd" &> /dev/null && echo "    ✓ $service restarted" || echo "    ⚠️  Failed to restart $service"
+    fi
+}
+
+# ==============================================================================
+# Reload Services
+# ==============================================================================
+
+# Reload Hyprland configuration
+reload_if_running "Hyprland" "hyprctl reload"
+
+# Restart Waybar to pick up new config
+restart_if_running "waybar" "pkill waybar && waybar &"
+
+# Restart Mako notification daemon
+restart_if_running "mako" "pkill mako && mako &"
+
+# Restart SwayOSD
+restart_if_running "swayosd-server" "pkill swayosd-server && swayosd-server &"
+
+# Reload systemd user daemon
+if systemctl --user list-unit-files | grep -q "omarchy-battery-monitor.service"; then
+    echo "  ↻ Reloading systemd user daemon..."
+    systemctl --user daemon-reload
+    echo "    ✓ systemd daemon reloaded"
+fi
+
+# Reload fish plugins (if fisher is available and fish is running)
+if command -v fish &> /dev/null && fish -c "type -q fisher" &> /dev/null; then
+    if pgrep -x fish > /dev/null; then
+        echo "  ↻ Updating fish plugins..."
+        fish -c "fisher update" &> /dev/null && echo "    ✓ Fish plugins updated" || echo "    ⚠️  Failed to update fish plugins"
+    fi
+fi
+
+echo "✅ Configuration reload complete!"
