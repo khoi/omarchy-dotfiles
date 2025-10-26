@@ -41,6 +41,7 @@ end
 # PATH
 fish_add_path ~/.bin
 fish_add_path ~/.local/bin
+fish_add_path ~/.local/share/omarchy/bin
 
 # zoxide
 if command -v zoxide &>/dev/null
