@@ -24,6 +24,7 @@ alias vim nvim
 alias cat bat
 alias lg lazygit
 alias ac "claude --dangerously-skip-permissions"
+alias ad "codex --dangerously-bypass-approvals-and-sandbox"
 
 # eza aliases (if available)
 if command -v eza &>/dev/null

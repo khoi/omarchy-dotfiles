@@ -25,3 +25,4 @@ alias lg='lazygit'
 
 # Claude aliases
 alias ac='claude --dangerously-skip-permissions'
+alias ad='codex --dangerously-bypass-approvals-and-sandbox'
