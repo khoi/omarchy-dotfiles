@@ -179,6 +179,10 @@ This applies to:
 
 Use `chezmoi add` and `chezmoi destroy` or other chezmoi commands. Never commit anything in the chezmoi directory.
 
+Stage changes interactively in tmux by running `git add --patch <file>` for specific files or `git add --patch` for all changes. This lets you review and select exactly which changes to stage hunk-by-hunk. Do NOT use 'git add .' as it stages everything without review.
+
+After staging, run "claude -p '/commit'" to create the commit.
+
 
 ## Documentation
 
